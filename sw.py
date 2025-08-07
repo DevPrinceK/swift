@@ -1,5 +1,5 @@
 from decorators import timer
-import numpy as np
+import numpy as np # type: ignore
 from swift import swift_alignment
 from collections import defaultdict
 from typing import List, Tuple, Dict

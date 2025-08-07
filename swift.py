@@ -6,7 +6,7 @@ improved performance in local sequence alignment.
 '''
 
 from decorators import timer
-import numpy as np
+import numpy as np # type: ignore
 from collections import defaultdict
 from typing import List, Tuple, Dict
 
