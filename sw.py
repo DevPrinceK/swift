@@ -54,8 +54,17 @@ def smith_waterman_full(query: str, target: str, match_score: int = 2, mismatch_
 
 
 if __name__ == "__main__":
-    query_sequence = generate_random_dna_sequence(1000)
-    target_sequence = generate_random_dna_sequence(5000)
+    query_sequence = ""
+    target_sequence = ""
+
+        # read sequences from file
+    with open("test_data.txt", "r") as f:
+        lines = f.readlines()
+        for i in range(len(lines)):
+            lines[i] = lines[i].strip()
+        query_sequence = lines[1]
+        target_sequence = lines[3]
+        
     results = swift_alignment(query_sequence, target_sequence)
 
     for score, aligned_q, aligned_t, tile in results:

@@ -14,6 +14,6 @@ def timer(func):
         start_time = perf_counter()
         result = func(*args, **kwargs)
         end_time = perf_counter()
-        print(f"Execution time: {end_time - start_time:.4f} seconds")
+        print(f"Execution time for ({func.__name__}): {end_time - start_time:.4f} seconds")
         return result
     return wrapper
