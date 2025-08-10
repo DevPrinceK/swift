@@ -64,7 +64,6 @@ def smith_waterman_tile(query: str, target: str, match_score: int = 2, mismatch_
     max_pos = (0, 0)
 
     for i in range(1, m+1):
-        # vectorization would be possible but keep simple for clarity
         for j in range(1, n+1):
             match = score_matrix[i-1][j-1] + (match_score if query[i-1] == target[j-1] else mismatch_penalty)
             delete = score_matrix[i-1][j] + gap_penalty
@@ -247,39 +246,6 @@ def plot_alignment_identity(aligned_q: str, aligned_t: str, title: str = "Alignm
     plt.tight_layout()
     plt.show()
 
-# ---------------------------
-# Export functions: JSON & SAM
-# ---------------------------
-# def export_alignments_json(alignments_info: List[dict], file_path: str = "alignments.json"):
-#     with open(file_path, "w") as f:
-#         json.dump(alignments_info, f, indent=2)
-#     print(f"[INFO] Exported JSON -> {file_path}")
-
-# def export_alignments_json(alignments, file_path="alignments.json"):
-#     # Convert to JSON-safe types
-#     def convert(obj):
-#         if isinstance(obj, (np.integer,)):
-#             return int(obj)
-#         elif isinstance(obj, (np.floating,)):
-#             return float(obj)
-#         elif isinstance(obj, (np.ndarray,)):
-#             return obj.tolist()
-#         return obj
-
-#     alignments_info = [
-#         {
-#             "score": convert(score),
-#             "aligned_query": aligned_q,
-#             "aligned_target": aligned_t,
-#             "tile_range": [convert(r[0]), convert(r[1])]
-#         }
-#         for score, aligned_q, aligned_t, r in alignments
-#     ]
-
-#     with open(file_path, "w") as f:
-#         json.dump(alignments_info, f, indent=2)
-
-#     print(f"[INFO] Alignments exported to {file_path}")
 
 def export_alignments_json(alignments, file_path="alignments.json"):
     def convert(obj):
@@ -297,26 +263,14 @@ def export_alignments_json(alignments, file_path="alignments.json"):
 
     alignments_info = []
     for aln in alignments:
-        # Unpack only what we can safely
-        print(f"Processing alignment: {aln}")
-        score = aln.get("score")
-        aligned_q = aln.get("aligned_query", "")
-        aligned_t = aln.get("aligned_target", "")
-        tile_range = aln.get("tile_range", ())
-       
-
-        alignments_info.append({
-            "score": convert(score),
-            "aligned_query": convert(aligned_q),
-            "aligned_target": convert(aligned_t),
-            "tile_range": convert(tile_range),
-            "extra_data": convert(aln[4:]) if len(aln) > 4 else None
-        })
+        converted = {k: convert(v) for k, v in aln.items()}
+        alignments_info.append(converted)
 
     with open(file_path, "w") as f:
         json.dump(alignments_info, f, indent=2)
 
     print(f"[INFO] Alignments exported to {file_path}")
+
 
 
 def make_cigar(aligned_q: str, aligned_t: str) -> str:
@@ -372,6 +326,8 @@ def export_alignments_sam(alignments_info: List[dict], target_name: str = "targe
 def run_traditional_sw_tilelike(query: str, target: str):
     # Run the smith_waterman_tile on the whole target (this is "traditional" in our comparison)
     return smith_waterman_tile(query, target)
+
+
 
 def compare_performance(query: str, target: str, swift_fn, workers: Optional[int] = None):
     print("\n--- Performance comparison ---")
@@ -483,7 +439,9 @@ if __name__ == "__main__":
             print("[INFO] No alignments found to visualize.")
 
     # 6) Performance comparison
+    # perf_summary = compare_performance(query_sequence, target_sequence)
     perf_summary = compare_performance(query_sequence, target_sequence, swift_alignment_parallel)
     print("\nPerformance summary:", perf_summary)
+    # print("\nPerformance summary:", perf_summary)
 
     print("\nDone. Files produced (if any): alignments.json, alignments.sam")
