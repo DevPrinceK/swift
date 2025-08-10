@@ -5,6 +5,9 @@ It introduces **k-mer–based intelligent filtering**, **tiled alignment**, and 
 
 ---
 
+## SWIFT Architecture
+![alt text](images/swift-algorithm.jpg)
+
 ## 🚀 Features
 - **Intelligent k-mer Filtering** – Quickly eliminates unlikely match regions before alignment.
 - **Tiling Strategy** – Breaks candidate regions into manageable tiles for faster processing.
@@ -31,7 +34,7 @@ README.md            # Documentation
 
 1. **Clone this repository**
 ```bash
-git clone https://github.com/yourusername/swift-alignment.git
+git clone https://github.com/DevPrinceK/swift.git
 cd swift-alignment
 ```
 
@@ -68,6 +71,7 @@ ATAAGCCACCAGCTCCG...
 
 ### 2. Run SWIFT
 ```bash
+python test_data.py // to generate test data
 python swift-v2.py
 ```
 
@@ -118,7 +122,8 @@ ATATG-CAATAGCGCAG-C-GAAC-GAAG--AGCGAC-ATACAAATCCG
 ||| | ||  ||| | | | |  | || |  || | | | ||| ||| |
 ATAAGCCACCAGCTCCGACGGTGCTGACGCTAGTGCCAAAACATATCGG
 ```
-
+![alt text](images/alignment-1.png)
+![alt text](images/alignment-2.png)
 ---
 
 ## ⚙️ Parameters
@@ -135,9 +140,9 @@ WORKERS = None        # CPU cores (None = auto-detect)
 ## 📚 Citation
 If you use SWIFT in your research, please cite:
 ```
-Samuel PK, 2025.
+Kyeremanteng P.S., 2025.
 SWIFT: Smith–Waterman with Intelligent Filtering and Tiling.
-GitHub Repository. https://github.com/DevPrinceK/swift
+GitHub Repository. https://github.com/DevPrinceK/swift.git
 ```
 
 ---

@@ -8,6 +8,9 @@ EXTRAS:
 - Merge, refine (with Smith-Waterman), and export results (JSON + SAM)
 - ASCII + matplotlib visualization
 - Performance comparison with traditional Smith-Waterman
+
+By: Prince Samuel Kyeremanteng @2025
+
 '''
 
 
@@ -21,7 +24,7 @@ import matplotlib.pyplot as plt
 import os
 
 # ---------------------------
-# Timer decorator (keeps your original behavior)
+# Timer decorator
 # ---------------------------
 def timer(func):
     def wrapper(*args, **kwargs):
