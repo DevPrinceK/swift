@@ -1,6 +1,6 @@
 from decorators import timer
 import numpy as np # type: ignore
-from swift import swift_alignment
+# from swift import swift_alignment
 from collections import defaultdict
 from typing import List, Tuple, Dict
 
@@ -64,8 +64,8 @@ if __name__ == "__main__":
             lines[i] = lines[i].strip()
         query_sequence = lines[1]
         target_sequence = lines[3]
-        
-    results = swift_alignment(query_sequence, target_sequence)
 
-    for score, aligned_q, aligned_t, tile in results:
-        print(f"Score: {score}, Aligned Query: {aligned_q}, Aligned Target: {aligned_t}, Tile: {tile}")
+    results = smith_waterman_full(query_sequence, target_sequence)
+
+    for score, aligned_q, aligned_t in results:
+        print(f"Score: {score}, Aligned Query: {aligned_q}, Aligned Target: {aligned_t}")
