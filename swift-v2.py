@@ -362,7 +362,7 @@ if __name__ == "__main__":
     except Exception as e:
         raise ValueError("test_data.txt not in expected format. Use the >query / >target layout like in your original file.") from e
 
-    # Parameters you can tune:
+    # Parameters:
     K = 3
     TILE_SIZE = 64
     HIT_THRESHOLD = 2

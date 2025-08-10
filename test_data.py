@@ -8,10 +8,10 @@ def generate_random_dna_sequence(length: int) -> str:
 
 
 if __name__ == "__main__":
-    # Generate a realistic query (50,000 bp) and target (100,000 bp)
-    long_query = generate_random_dna_sequence(50_000)
+    # Generate a realistic
+    long_query = generate_random_dna_sequence(5_000)
     long_target = (
-        generate_random_dna_sequence(100_000)
+        generate_random_dna_sequence(10_000)
     )
     # long_target = (
     #     generate_random_dna_sequence(100000) +
