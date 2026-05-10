@@ -9,15 +9,11 @@ def generate_random_dna_sequence(length: int) -> str:
 
 if __name__ == "__main__":
     # Generate a realistic
-    long_query = generate_random_dna_sequence(5_000)
+    long_query = generate_random_dna_sequence(10_000)
     long_target = (
-        generate_random_dna_sequence(10_000)
+        generate_random_dna_sequence(15_000)
     )
-    # long_target = (
-    #     generate_random_dna_sequence(100000) +
-    #     long_query[200:700] +  # Insert partial match from query into target
-    #     generate_random_dna_sequence(2300)
-    # )
+
 
     # save in txt file
     with open("test_data.txt", "w") as f:
